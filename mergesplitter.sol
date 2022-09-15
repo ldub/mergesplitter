@@ -11,11 +11,7 @@ contract MergeSplitter {
   function splitTransfer(
     address to
   ) external payable {
-    uint256 currentDifficulty = 0;
-    assembly {
-        currentDifficulty := difficulty()
-    }
-    if (currentDifficulty == 0) {
+    if (block.difficulty == 0) {
         payable(msg.sender).sendValue(msg.value);
     } else {
         payable(to).sendValue(msg.value);
